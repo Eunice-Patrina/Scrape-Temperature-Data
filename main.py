@@ -8,7 +8,15 @@ def scrapper(url):
     source = response.text
     return source
 
+def extract(source):
+    extractor = selectorlib.Extractor.from_yaml_file("extract.yaml")
+    value = extractor.extract(source)["tours"]
+    return value
+
+
+
 
 if __name__ == "__main__":
     source = scrapper(url)
-    print(source)
+    value = extract(source)
+    print(value)

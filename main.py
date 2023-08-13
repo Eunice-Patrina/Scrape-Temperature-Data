@@ -1,5 +1,6 @@
 import requests
 import selectorlib
+from datetime import datetime
 
 url="http://programmer100.pythonanywhere.com"
 
@@ -13,10 +14,12 @@ def extract(source):
     value = extractor.extract(source)["tours"]
     return value
 
-
-
+def write(message):
+    with open("data.txt", 'a') as file:
+        file.write(f'{message}\n')
 
 if __name__ == "__main__":
+    date = datetime.now()
     source = scrapper(url)
     value = extract(source)
-    print(value)
+    write(f'{date.strftime("%Y-%m-%d-%H-%M-%S")},{value}')
